@@ -4,17 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
-
-mongoose.connect('mongodb://heroku_5b17ktv3:qotccdgcbqch14qfvhee0ot196@ds131721.mlab.com:31721/heroku_5b17ktv3', { useNewUrlParser: true})
-var db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function() {
-  console.log('connected !')
-})
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+const evenements = require('./routes/api/evenement/evenement')
 
 var app = express();
 
@@ -32,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/api/evenement', evenements)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
