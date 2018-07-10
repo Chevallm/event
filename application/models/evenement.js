@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 
 const EvenementSchema = mongoose.Schema({
-    title: String
+    title: {
+        type: String,
+        required: true
+    }
 })
 
 const Evenement = mongoose.model('Evenement', EvenementSchema)

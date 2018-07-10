@@ -5,15 +5,22 @@ const Evenement = require('../../../application/models/evenement')
 
 router.route('/')
     .get( (req, res, next) => {
-        Evenement.find( (err, res) => {
-             res.json(res)
+        Evenement.find( (err, resp) => {
+             res.json(resp)
         }).catch( err => {
             res.send(err)
         })
     })
     .post( (req, res, next) => {
+        console.log(req.body.title)
         Evenement.create({
-            name: req.body.name
+            title: req.body.title,
+        }).then( (err) => {
+            if(err) res.send(err)
+            else
+                res.status(201)
+        }).catch( err => {
+            res.status(400).send(err.message)
         })
     })
 
