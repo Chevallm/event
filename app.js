@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+require('dotenv').config()
+
 var mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true});
 const db = mongoose.connection
@@ -13,7 +15,8 @@ db.once('open', function() {
     console.log('Connected to MongoDB !')
 })
 
-var index = require('./routes/index');
+var index = require('./routes/client/home/index');
+const eventsRouter = require('./routes/client/events/events');
 var users = require('./routes/users');
 const evenements = require('./routes/api/evenement/evenement')
 
@@ -31,8 +34,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//client
 app.use('/', index);
 app.use('/users', users);
+app.use('/events', eventsRouter)
+//api
 app.use('/api/evenements', evenements)
 
 // catch 404 and forward to error handler

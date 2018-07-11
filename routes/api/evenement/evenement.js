@@ -6,22 +6,33 @@ const Evenement = require('../../../application/models/evenement')
 router.route('/')
     .get( (req, res, next) => {
         Evenement.find( (err, resp) => {
-             res.json(resp)
+            res.json(resp)
         }).catch( err => {
             res.send(err)
         })
     })
     .post( (req, res, next) => {
-        console.log(req.body.title)
         Evenement.create({
             title: req.body.title,
-        }).then( (err) => {
-            if(err) res.send(err)
-            else
-                res.status(201)
-        }).catch( err => {
+        }).then( resp => {
+            const ObjectId = resp._id
+            res.status(201).location(`/api/evenements/${ObjectId}`).json(resp)
+        })
+        .catch( err => {
             res.status(400).send(err.message)
         })
     })
+
+router.route('/:id')
+    .get( (req, res, next) => {
+        Evenement.findById(req.params.id)
+            .then( resp => {
+                res.json(resp)
+            })
+            .catch( err => {
+                res.status(400).send(err.message)
+            })
+    })
+
 
 module.exports = router;

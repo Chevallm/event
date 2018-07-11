@@ -1,0 +1,17 @@
+header
+    nav.navbar.is-info(role="navigation", aria-label="main navigation")
+        .navbar-brand
+            a.navbar-item(href="/")
+                img(src="https://bulma.io/images/bulma-logo.png", alt="Logo", width="112", height="28")
+            a.navbar-burger(role="button", aria-label="menu", aria-expanded="false")
+                span(aria-hidden="true")
+                span(aria-hidden="true")
+                span(aria-hidden="true")
+        .navbar-menu
+            .navbar-start
+                a.navbar-item(href="/events") Evenements
+            .navbar-end
+                a.navbar-item(href="/login")
+                    span.icon
+                        i.fas.fa-user-circle(aria-hidden="true")
+                    span Connexion

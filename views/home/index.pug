@@ -1,0 +1,29 @@
+extends ../layout/layout
+
+block content
+  section.hero.is-light
+    .hero-body
+      .container.has-text-centered
+        h1.title Event
+        h2.subtitle What are you tryng to achieve ?
+        .columns
+          .column
+            a.button.is-primary(href="/events/create") Create
+          .column
+            form(action="/events/join", method="GET")
+              .field.has-addons
+                .control
+                  input.input(type="text", name="code", placeholder="EX: 012F")
+                .control
+                  a.button.is-primary(type="submit") GO
+  section.section
+    .container
+      .card
+        header.card-header
+          p.card-header-title What is event ?
+        .card-content
+          .content
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius placeat voluptatem odio at assumenda ut esse voluptatum ducimus provident ipsum minima totam, molestias aspernatur nesciunt excepturi minus nobis ad distinctio.
+        footer.card-footer
+          p.card-footer-item
+            a(href="/read-more") Learn more
