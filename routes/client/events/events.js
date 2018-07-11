@@ -20,7 +20,7 @@ router.route('/create')
     res.render('events/create', { title: 'Create event'})
   })
   .post( (req, res, next) => {
-    const url = `http://${process.env.HOST}/api/evenements`
+    const url = `https://${process.env.HOST}/api/evenements`
     console.log(url)
     request.post(url, (error, response, body) => {
       console.log('error: ', error); // Print the error if one occurred
